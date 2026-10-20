@@ -1,7 +1,7 @@
-const Databse = require('better-sqlite3');
+const Database = require('better-sqlite3');
 const path = require('path');
 
-const db = new Databse(path.join(__dirname, '../../devjobs.db'));
+const db = new Database(path.join(__dirname, '../../devjobs.db'));
 
 db.exec(
     `
@@ -9,7 +9,7 @@ db.exec(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
             email TEXT UNIQUE NOT NULL,
-            senha_hash TEXT NOT NULL,
+            senha_hash TEXT NOT NULL
         );
 
         CREATE TABLE IF NOT EXISTS vagas(
@@ -23,11 +23,11 @@ db.exec(
             cidade TEXT,
             estado TEXT,
             descricao TEXT,
-            create_at TEXT DEFAULT (datetime('now')),
+            created_at TEXT DEFAULT (datetime('now')),
             FOREIGN KEY (empresa_id) REFERENCES empresas(id)
         );
     
     `
 );
 
-module.exports - db;
+module.exports = db;
