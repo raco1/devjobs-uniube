@@ -18,6 +18,12 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/vagas', vagasRoutes);
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ erro: 'Erro interno do servidor' });
+});
+
+
 app.listen(PORT, () => {
   console.log(`DevJobs API rodando em http://localhost:${PORT}`);
 });
